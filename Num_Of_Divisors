@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define MX 32000
+vector<int> primes;
+void seive( )
+{
+    bool isPrime[MX];
+    memset(isPrime, true, sizeof(isPrime));
+    isPrime[0] = isPrime[1] = false;
+    for (int i = 2; i * i <= MX;i++){
+        if(isPrime[i]){
+            for (int j = i * i; j <= MX;j+=i){
+                isPrime[j] = false;
+            }
+        }
+    }
+    for (int i = 2; i < MX;i++){
+        if(isPrime[i])
+            primes.push_back(i);
+    }
+}
+int main( )
+{
+    seive();
+    int n;
+    cin >> n;
+    
+    int sum = 1;//number of divisors.
+
+    for (int i = 0; primes[i] <= n;i++){
+        int cnt = 0;
+        while(n%primes[i]==0 && n>=0){
+        n /= primes[i];
+        ++cnt;
+        }
+        cnt++;
+        sum *= cnt;
+    }
+    cout << sum << endl;
+}
