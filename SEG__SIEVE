@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define MX 32000
+vector<ll> primes;
+void seive()
+{
+    bool isPrime[MX + 1];
+    memset(isPrime, true, sizeof(isPrime));
+    isPrime[0] = isPrime[1] = false;
+    for (ll i = 2; i * i <= MX;i++){
+    if(isPrime[i]==true){
+         for (ll j = i * i; j <= MX;j+=i){
+        isPrime[j] = false;
+        }
+      }
+    }
+    
+    for (ll i = 0; i < MX + 1; i++)
+    {
+        //cout << isPrime[i] << "  ";
+        if(isPrime[i])
+            primes.push_back(i);
+    }
+}
+
+void seg_seive(ll l,ll r)
+{
+    ll n = r - l + 1;
+    bool prime[n];
+    memset(prime, true, sizeof(prime));
+    if(l==1)
+        prime[0] = false;
+    for (ll i = 0; primes[i] * primes[i] <= r;i++){
+        ll cp = primes[i];
+        ll base = (l / cp) * cp;//cp==current_prime;
+        if(base<l)
+            base += cp;//base:starting point of marking a number false...
+        for (ll j = base; j <= r;j+=cp){
+            prime[j - l] = false;
+        }
+        if(base==cp)
+            prime[base - l] = true;
+    }
+    for (ll i = 0;i<n; i++)
+    {
+        if(prime[i])
+            cout << l + i << endl;
+    }
+    cout << endl;
+}
+
+int  main( )
+{
+    seive();
+    ll t;
+    cin >> t;
+    while(t--)
+    {
+        ll lo, hi;
+        cin >> lo >> hi;
+        seg_seive(lo, hi);
+    }
+}
