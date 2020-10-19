@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define MX 32000
+vector<int> primes;
+void seive( )
+{
+    bool isPrime[MX + 1];
+    memset(isPrime, true, sizeof(isPrime));
+    isPrime[0] = isPrime[1] = false;
+    for (int i = 2; i*i < MX;i++){
+        if(isPrime[i]){
+            for (int j = i * i; j <= MX;j+=i){
+                isPrime[j] = false;
+            }
+        }
+    }
+    for (int i = 2; i < MX;i++){
+        if(isPrime[i])
+            primes.push_back(i);
+    }
+}
+int SOD_count(int n)
+{
+    seive();
+    int mul = 1;
+    for (int i = 0; primes[i]<= n;i++){
+        int cnt = 1;
+        while(n>=0 && n%primes[i]==0){
+            n /= primes[i];
+            cnt++;
+        }
+        mul *= (pow(primes[i], cnt) - 1) / (primes[i] - 1);
+    }
+    return mul;
+}
+int  main( )
+{
+    int n;
+    cin >> n;
+    cout << SOD_count(n) << endl;
+}
