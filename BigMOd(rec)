@@ -19,6 +19,18 @@ int BigMod(int b,int p,int m)
         return (part1 * part2) % m;
     }
 }
+//Sort version Code.....
+int BigMod(int b,int p,int m)
+{
+    if(p==0)
+        return 1;
+    int x = BigMod(b, p / 2, m);
+    x = (x * x) % m;
+    if(p%2==1)
+        x = (x * b) % m;
+    return x;
+}
+
 int main( )
 {
     int base, power, mod;
