@@ -1,0 +1,51 @@
+                                                                     O(sqrt(N)) Algorithm....
+
+int phi(int n)
+{
+    int res = n;
+    for (int i = 2; i * i <= n;i++){
+        if(n%i==0){
+            res /= i;
+            res *= (i - 1);
+            while(n%i==0)
+                n /= i;
+        }
+    }
+
+    if(n>1){
+        res /= n;
+        res *= (n - 1);
+    }
+    return res;
+}
+
+
+                                                              O(Nlog(logN)) Algorithm...
+
+#define MX 1000002
+int phi[MX];
+void find_etf( )
+{
+    for (int i = 1; i <= MX;i++){
+        phi[i] = i;
+    }
+    for (int i = 2; i <= MX;i++){
+        if(phi[i]==i){
+            for (int j = i; j <= MX;j+=i){
+                phi[j] /= i;
+                phi[j] *= (i - 1);
+            }
+        }
+    }
+}
+int main( )
+{
+    find_etf();
+    int TC;
+    cin >> TC;
+    while(TC--){
+        int n;
+        cin >> n;
+        cout << phi[n] << endl;
+    }
+}
