@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+int __lcm(int x, int y)
+{
+    return (x * y) / __gcd(x, y);
+}
+int main( )
+{
+    int n;
+    cin >> n;
+    int a[n];
+    for (int i = 0; i < n;i++)
+        cin >> a[i];
+    int gcd = __gcd(a[0], a[1]);
+    int lcm = __lcm(a[0], a[1]);
+    for (int i = 2; i < n; i++)
+    {
+           gcd = __gcd(gcd, a[i]);
+           lcm = __lcm(lcm, a[i]);
+    }
+
+    cout << "GCD is : " << gcd << endl;
+    cout << "LCM is : " << lcm << endl;
+}
