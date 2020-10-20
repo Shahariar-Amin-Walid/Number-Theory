@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+ll nCr(ll n,ll r)
+{
+    ll a=1,b=1;
+    if(n-r<r)r=n-r;
+    if(r==0)return 1;
+    while(r!=0)
+    {
+        a*=n;n--;
+        b*=r;r--;
+        int g=__gcd(a,b);
+        a/=g;b/=g;
+    }
+    return a;
+}
+int main( )
+{
+    ll TC;
+    cin>>TC;
+    while(TC--)
+    {
+        ll n,r;
+        cin>>n>>r;
+        cout<<nCr(n,r)<<endl;
+    }
+}
