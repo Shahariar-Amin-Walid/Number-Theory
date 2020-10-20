@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+//কোন  সংখ্যার ফ্যাক্টোরিয়ালে মোট কয়টা সংখ্যা আছে???
+int count_num(int n)
+{
+    double cnt=0;
+    for(int i=1;i<=n;i++)
+    {
+        cnt+=log10(i);
+    }
+    int res=cnt+1;
+}
+
+//ফ্যাক্টোরিয়ালের  পিছনে  কয়টা  শূণ্য আছে ? ? ?
+int count_0(int n)
+{
+	int cnt=0;
+	for (int i = 5; i <= n; i *= 5){
+		cnt += (n / i);
+	}
+	return cnt;
+}
+//মেইন  ফাংশন
+
+int main( )
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin >> n;
+		cout<<count_num(n)<<endl;
+	}
+}
