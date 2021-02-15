@@ -1,0 +1,61 @@
+Complexity is O(log N)
+
+
+/* GOD CREATES ME TO THINK */
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define ld long double
+#define sfi(x) scanf("%d",&x)
+#define sfl(x) scanf("%lld",&x)
+#define PB push_back
+#define MP make_pair
+#define FF first
+#define SS second
+#define ALL(x)  x.begin(), x.end()
+#define PI 3.141592653589793238462
+#define MM 10e9 + 7
+#define LP(i,a,b) for(ll i=(a);i<(b);i++)
+#define RLP(i,a,b) for(int i=(b);i>=a;i--)
+#define D(x) cout<<"DEBUG:\t"<<#x<<" = "<<x<<endl;
+
+const int N=100001;
+void multiply(int F[2][2],int M[2][2])
+{
+    int x1=F[0][0]*M[0][0] + F[0][1]*M[1][0];
+    int x2=F[0][0]*M[0][1] + F[0][1]*M[1][1];
+    int x3=F[1][0]*M[0][0] + F[1][1]*M[1][0];
+    int x4=F[1][0]*M[0][1] + F[1][1]*M[1][1];
+
+    F[0][0]=x1;
+    F[0][1]=x2;
+    F[1][0]=x3;
+    F[1][1]=x4;
+}
+void power(int F[2][2],int n)
+{
+    int M[2][2]={{1,1},{1,0}};
+    for(int i=2;i<=n;i++)
+        multiply(F,M);
+}
+int fib(int n)
+{
+    int F[2][2]={{1,1},{1,0}};
+    if(n==0)return 0;
+    power(F,n-1);
+    return F[0][0];
+}
+void solve( )
+{
+    int n;
+    scanf("%d",&n);
+    printf("%d th Fibonacci is %d\n",n,fib(n));
+}
+int main( )
+{
+    int test_case=1;
+    //scanf("%d",&test_case);
+    while(test_case--){
+        solve();
+    }
+}
